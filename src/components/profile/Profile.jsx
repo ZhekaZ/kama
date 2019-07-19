@@ -1,17 +1,18 @@
 import React from 'react';
-import Post from "./MyPosts/Post/Post";
+// import Post from "./MyPosts/Post/Post";
+import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = props => {
     return (
         <div>
-            <h2>My posts</h2>
-            <textarea></textarea>
-            <br/>
-            <button>Add post</button>
-            <div>
-                <Post message='How are you?'/>
-                <Post message='1st post'/>
-            </div>
+            <ProfileInfo/>
+            <MyPosts
+                posts={ props.state.posts }
+                newPostText={ props.state.newPostText }
+                addPost={ props.addPost }
+                changePost={ props.changePost }
+            />
         </div>
     )
 };
