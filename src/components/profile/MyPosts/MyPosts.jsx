@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './myposts.module.scss';
 import Post from "./Post/Post";
+import { addPostAC, postChangeAC } from "../../../store/reducers/profile.reducer";
 
 const MyPosts = props => {
     const postsElements =
@@ -12,13 +13,13 @@ const MyPosts = props => {
     let newPostElement = React.createRef();
 
     const addPost = () => {
-        props.addPost();
+        props.dispatch(addPostAC());
     };
 
     const onPostChange = () => {
         const text = newPostElement.current.value;
 
-        props.changePost(text);
+        props.dispatch(postChangeAC(text));
     };
 
     return (

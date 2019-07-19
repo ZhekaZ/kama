@@ -1,52 +1,55 @@
-import { randomInt } from "../CONST";
-import rerenderOnStateChange from "../render";
+import dialogsReducer from './reducers/dialogs.reducer';
+import profileReducer from './reducers/profile.reducer';
+import sidebarReducer from "./reducers/sidebar.reducer";
 
-const state = {
-    profilePage: {
-        posts: [
-            {id: 11, message: 'How are you?', likesCount: 5},
-            {id: 12, message: 'hello man', likesCount: 3},
-            {id: 13, message: 'you niggar', likesCount: 2},
-            {id: 14, message: 'go back', likesCount: 4},
-        ],
-        newPostText: 'kamasutra',
+const store = {
+    _state: {
+        profilePage: {
+            posts: [
+                { id: 11, message: 'How are you?', likesCount: 5 },
+                { id: 12, message: 'hello man', likesCount: 3 },
+                { id: 13, message: 'you niggar', likesCount: 2 },
+                { id: 14, message: 'go back', likesCount: 4 },
+            ],
+            newPostText: 'kamasutra',
+        },
+        dialogsPage: {
+            dialogs: [
+                { id: 21, name: 'Dimon' },
+                { id: 22, name: 'Osvald' },
+                { id: 23, name: 'Larik' },
+                { id: 24, name: 'Yanka' },
+                { id: 25, name: 'Mashka' },
+            ],
+            messages: [
+                { id: 31, message: 'How are you?' },
+                { id: 32, message: 'asdffdskfl  sldkf' },
+                { id: 33, message: 'gdsfl; ;g lscsdc' },
+                { id: 34, message: 'g;fs ;lfd' },
+                { id: 35, message: 'dsf ;fgl;megkl;me' },
+            ],
+            newMessageText: 'kamasutra',
+        },
+        sidebar: {},
     },
-    dialogsPage: {
-        dialogs: [
-            {id: 21, name: 'Dimon'},
-            {id: 21, name: 'Osvald'},
-            {id: 21, name: 'Larik'},
-            {id: 21, name: 'Yanka'},
-            {id: 21, name: 'Mashka'},
-        ],
-        messages: [
-            {id: 31, name: 'How are you?'},
-            {id: 31, name: 'asdffdskfl  sldkf'},
-            {id: 31, name: 'gdsfl; ;g lscsdc'},
-            {id: 31, name: 'g;fs ;lfd'},
-            {id: 31, name: 'dsf ;fgl;megkl;me'},
-        ],
+    getState() {
+        return this._state;
     },
-    sidebar: {},
+    _callSubscriber() {
+        console.log('State changed');
+    },
+    dispatch(action) {
+        dialogsReducer(this._state.dialogsPage, action);
+        profileReducer(this._state.profilePage, action);
+        sidebarReducer(this._state.sidebar, action);
+
+        this._callSubscriber(this._state);
+    },
+    subscribe(observer) {
+        this._callSubscriber = observer;
+    },
 };
 
-export const addPost = () => {
-    const newPost = {
-        id: randomInt(1000, 100000),
-        message: state.profilePage.newPostText,
-        likesCount: 0,
-    };
+export default store;
 
-    state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText = '';
-    rerenderOnStateChange(state);
-};
-
-export const changePost = text => {
-    state.profilePage.newPostText = text;
-    rerenderOnStateChange(state);
-};
-
-window.state = state;
-
-export default state;
+window.store = store;

@@ -2,10 +2,10 @@ import React from 'react';
 import { Route } from "react-router-dom";
 import './App.scss';
 
-import Profile from "./components/profile/Profile";
-import Header from "./components/header/Header";
-import NavBar from "./components/navbar/Navbar";
-import Dialogs from "./components/dialogs/Dialogs";
+import Profile from './components/profile/Profile';
+import Header from './components/header/Header';
+import NavBar from './components/navbar/Navbar';
+import Dialogs from './components/dialogs/Dialogs';
 
 const App = props => {
     return (
@@ -15,12 +15,14 @@ const App = props => {
                 <NavBar/>
                 <main className='content'>
                     <Route path='/dialogs'
-                           render={ () => <Dialogs state={ props.state.dialogsPage }/> }/>
+                           render={ () => <Dialogs
+                               store={ props.store }
+                           /> }/>
                     <Route path='/profile'
                            render={ () => <Profile
                                state={ props.state.profilePage }
-                               changePost={ props.changePost }
-                               addPost={ props.addPost }/> }/>
+                               dispatch={ props.dispatch }
+                           /> }/>
                 </main>
             </div>
         </div>
