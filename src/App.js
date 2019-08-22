@@ -15,9 +15,9 @@ const App = props => {
                 <NavBar/>
                 <main className='content'>
                     <Route path='/dialogs'
-                           render={ () => <DialogsContainer store={ props.store }/> }/>
+                           render={ () => <DialogsContainer /> }/>
                     <Route path='/profile'
-                           render={ () => <Profile store={ props.store }/> }/>
+                           render={ () => <Profile /> }/>
                 </main>
             </div>
         </div>

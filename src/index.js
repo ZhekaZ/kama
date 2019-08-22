@@ -6,19 +6,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import
+    // StoreContext,
+    { Provider } from "./StoreContext";
 
-const rerenderOnStateChange = state => {
+const rerenderOnStateChange = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App
-                state={ store.getState() }
-                store={ store }
-                dispatch={ store.dispatch.bind(store) }/>
+            <Provider store={ store }>
+                <App/>
+            </Provider>
         </BrowserRouter>, document.getElementById('root')
     );
 
-    // console.log('State => ');
-    // console.log(state);
+    console.log('State => ');
+    console.log(state);
 };
 
 const state = store.getState();
