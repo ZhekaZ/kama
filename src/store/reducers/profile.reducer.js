@@ -1,6 +1,16 @@
 import CONST, { randomInt } from '../../CONST';
 
-const profileReducer = (state, action) => {
+const initialState = {
+    posts: [
+        { id: 11, message: 'How are you?', likesCount: 5 },
+        { id: 12, message: 'hello man', likesCount: 3 },
+        { id: 13, message: 'you niggar', likesCount: 2 },
+        { id: 14, message: 'go back', likesCount: 4 },
+    ],
+    newPostText: 'kamasutra',
+};
+
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case CONST.ADD_POST:
             const newPost = {

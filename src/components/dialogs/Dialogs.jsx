@@ -2,7 +2,6 @@ import React from 'react';
 import s from './dialogs.module.scss'
 import Button from '@material-ui/core/Button';
 import { NavLink } from 'react-router-dom';
-import { messageChangeAC, sendMessageAC } from '../../store/reducers/dialogs.reducer';
 
 const DialogItem = props => {
     const url = '/dialogs/' + props.id;
@@ -22,20 +21,19 @@ const Message = props => {
 const Dialogs = props => {
 
     const messageArea = React.createRef();
-    const state = props.store.getState().dialogsPage;
+    const state = props.dialogsPage;
 
     const DialogItems = state.dialogs.map(d => <DialogItem name={ d.name } id={ d.id } key={ d.id }/>);
     const MessagesItems = state.messages.map(m => <Message message={ m.message } key={ m.id }/>);
     const messageAreaText = state.newMessageText;
 
     const onSendMessage = () => {
-        props.store.dispatch(sendMessageAC());
+        props.sendMessage();
     };
 
     const onMessageChange = e => {
         // const text = messageArea.current.value;
-
-        props.store.dispatch(messageChangeAC(e.target.value));
+        props.updateMessage(e.target.value);
     };
 
     return (

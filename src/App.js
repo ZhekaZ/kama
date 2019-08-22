@@ -5,7 +5,7 @@ import './App.scss';
 import Profile from './components/profile/Profile';
 import Header from './components/header/Header';
 import NavBar from './components/navbar/Navbar';
-import Dialogs from './components/dialogs/Dialogs';
+import DialogsContainer from "./components/dialogs/DialogsContainer";
 
 const App = props => {
     return (
@@ -15,14 +15,9 @@ const App = props => {
                 <NavBar/>
                 <main className='content'>
                     <Route path='/dialogs'
-                           render={ () => <Dialogs
-                               store={ props.store }
-                           /> }/>
+                           render={ () => <DialogsContainer store={ props.store }/> }/>
                     <Route path='/profile'
-                           render={ () => <Profile
-                               state={ props.state.profilePage }
-                               dispatch={ props.dispatch }
-                           /> }/>
+                           render={ () => <Profile store={ props.store }/> }/>
                 </main>
             </div>
         </div>
