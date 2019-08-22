@@ -6,11 +6,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import
-    // StoreContext,
-    { Provider } from "./StoreContext";
+import { Provider } from "react-redux";
 
-const rerenderOnStateChange = () => {
+
+// const rerenderOnStateChange = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={ store }>
@@ -19,17 +18,13 @@ const rerenderOnStateChange = () => {
         </BrowserRouter>, document.getElementById('root')
     );
 
-    console.log('State => ');
-    console.log(state);
-};
+    // console.log('State => ');
+    // console.log(state);
+// };
 
-const state = store.getState();
+// const state = store.getState();
 
-rerenderOnStateChange(state);
-
-store.subscribe(() => {
-    rerenderOnStateChange(state);
-});
+// rerenderOnStateChange(state);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
