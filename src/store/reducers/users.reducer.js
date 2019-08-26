@@ -5,6 +5,7 @@ const initialState = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -14,7 +15,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return { ...u, followed: true}
+                        return { ...u, followed: true }
                     }
                     return u;
                 }),
@@ -25,7 +26,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return { ...u, followed: false}
+                        return { ...u, followed: false }
                     }
                     return u;
                 }),
@@ -43,6 +44,10 @@ const usersReducer = (state = initialState, action) => {
             return { ...state, totalUsersCount: action.totalUsersCount }
         }
 
+        case CONST.TOGGLE_IS_FETCHING: {
+            return { ...state, isFetching: action.isFetching }
+        }
+
         default:
             return state;
     }
@@ -53,5 +58,6 @@ export const unfollowAC = userId => ({ type: CONST.UNFOLLOW, userId });
 export const setUsersAC = users => ({ type: CONST.SET_USERS, users });
 export const setCurrentPageAC = currentPage => ({ type: CONST.SET_CURRENT_PAGE, currentPage });
 export const setTotalUsersCountAC = totalUsersCount => ({ type: CONST.SET_TOTAL_USERS_COUNT, totalUsersCount });
+export const toggleIsFetchingAC = isFetching => ({ type: CONST.TOGGLE_IS_FETCHING, isFetching });
 
 export default usersReducer;
