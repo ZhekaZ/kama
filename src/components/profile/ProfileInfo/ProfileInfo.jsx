@@ -4,17 +4,17 @@ import Preloader from "../../common/preloader/preloader";
 
 const ProfileInfo = props => {
     if (!props.profile) {
-        return <Preloader />
+        return <Preloader/>
     }
 
     return (
         <div>
             <div>
-                <h2>{props.profile.fullName}</h2>
-                <img src={props.profile.photos.large} alt=""/>
+                <h2>{ props.profile.fullName }</h2>
+                <img src={ props.profile.photos.large } alt=""/>
             </div>
-            <div className={s.descriptionBlock}>
-                ava + description
+            <div className={ s.descriptionBlock }>
+                { props.profile.lookingForAJobDescription }
             </div>
         </div>
     );
