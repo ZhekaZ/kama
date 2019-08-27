@@ -52,33 +52,37 @@ const Users = props => {
                             </NavLink>
                             { u.followed
                                 ? <Button variant="contained" color="secondary" size="small" className={ s.btnFollow }
-                                    // disabled={props.followingInProgress.some(id => id === u.id)}
+                                    disabled={props.followingInProgress.some(id => id === u.id) }
                                           onClick={ () => {
+                                              props.toggleFollowingProgress(true, u.id);
                                               axios.delete(CONST.BASE_URL + `follow/${ u.id }`, {
                                                   withCredentials: true,
                                                   headers: {
-                                                      'API-KEY': CONST.API_KEY,
+                                                      API_KEY: CONST.API_KEY,
                                                   },
                                               })
                                                   .then(response => {
                                                       if (response.data.resultCode === 0) {
                                                           props.unfollow(u.id);
                                                       }
+                                                      props.toggleFollowingProgress(false, u.id);
                                                   });
                                           } }>Unfollow</Button>
                                 : <Button variant="contained" color="default" size="small" className={ s.btnFollow }
-                                    // disabled={props.followingInProgress.some(id => id === u.id)}
+                                    disabled={props.followingInProgress.some(id => id === u.id) }
                                           onClick={ () => {
+                                              props.toggleFollowingProgress(true, u.id);
                                               axios.post(CONST.BASE_URL + `follow/${ u.id }`, {
                                                   withCredentials: true,
                                                   headers: {
-                                                      'API-KEY': CONST.API_KEY,
+                                                      API_KEY: CONST.API_KEY,
                                                   },
                                               })
                                                   .then(response => {
                                                       if (response.data.resultCode === 0) {
                                                           props.follow(u.id);
                                                       }
+                                                      props.toggleFollowingProgress(false, u.id);
                                                   });
                                           }}>Follow</Button>
                             }
