@@ -1,8 +1,8 @@
-import CONST from "../../CONST";
-import React from "react";
-import { connect } from "react-redux";
-import * as axios from "axios";
-import Users from "./Users";
+import CONST from '../../CONST';
+import React from 'react';
+import { connect } from 'react-redux';
+import * as axios from 'axios';
+import Users from './Users';
 
 import {
     follow,
@@ -11,14 +11,19 @@ import {
     setUsers, toggleIsFetching,
     unfollow,
 } from '../../store/reducers/users.reducer';
-import Preloader from "../common/preloader/preloader";
+import Preloader from '../common/preloader/preloader';
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
 
-        axios.get(CONST.BASE_URL + `/users?page=${ this.props.currentPage }&count=${ this.props.pageSize }`)
+        axios.get(CONST.BASE_URL + `/users?page=${ this.props.currentPage }&count=${ this.props.pageSize }`, {
+            withCredentials: true,
+            // headers: {
+            //     'API-KEY': CONST.API_KEY,
+            // },
+        })
             .then(response => {
                 this.props.setUsers(response.data.items);
                 this.props.setTotalUsersCount(response.data.totalCount);
@@ -30,7 +35,12 @@ class UsersContainer extends React.Component {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(p);
 
-        axios.get(CONST.BASE_URL + `/users?page=${ p }&count=${ this.props.pageSize }`)
+        axios.get(CONST.BASE_URL + `/users?page=${ p }&count=${ this.props.pageSize }`, {
+            withCredentials: true,
+            // headers: {
+            //     'API-KEY': CONST.API_KEY,
+            // },
+        })
             .then(response => {
                 this.props.setUsers(response.data.items);
                 this.props.toggleIsFetching(false);

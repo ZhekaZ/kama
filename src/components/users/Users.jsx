@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import s from './users.module.scss'
 import Avatar from "@material-ui/core/Avatar";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import * as axios from "axios";
 
 const useStyles = makeStyles({
     avatar: {
@@ -53,11 +54,33 @@ const Users = props => {
                                 ? <Button variant="contained" color="secondary" size="small" className={ s.btnFollow }
                                     // disabled={props.followingInProgress.some(id => id === u.id)}
                                           onClick={ () => {
-                                              props.unfollow(u.id)
+                                              axios.delete(CONST.BASE_URL + `follow/${ u.id }`, {
+                                                  withCredentials: true,
+                                                  headers: {
+                                                      'API-KEY': CONST.API_KEY,
+                                                  },
+                                              })
+                                                  .then(response => {
+                                                      if (response.data.resultCode === 0) {
+                                                          props.unfollow(u.id);
+                                                      }
+                                                  });
                                           } }>Unfollow</Button>
                                 : <Button variant="contained" color="default" size="small" className={ s.btnFollow }
                                     // disabled={props.followingInProgress.some(id => id === u.id)}
-                                          onClick={ () => props.follow(u.id) }>Follow</Button>
+                                          onClick={ () => {
+                                              axios.post(CONST.BASE_URL + `follow/${ u.id }`, {
+                                                  withCredentials: true,
+                                                  headers: {
+                                                      'API-KEY': CONST.API_KEY,
+                                                  },
+                                              })
+                                                  .then(response => {
+                                                      if (response.data.resultCode === 0) {
+                                                          props.follow(u.id);
+                                                      }
+                                                  });
+                                          }}>Follow</Button>
                             }
                         </div>
                         <div>

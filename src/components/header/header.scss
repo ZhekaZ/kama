@@ -3,6 +3,19 @@ header {
   background-color: #563d7c;
   font-size: calc(10px + 2vmin);
   color: white;
+
+  &.header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.btnLogo {
+  * {
+    color: #fff;
+    font-size: 14px;
+  }
 }
 
 .logo {

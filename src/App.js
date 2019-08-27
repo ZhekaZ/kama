@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from "react-router-dom";
 import './App.scss';
 
-import Header from './components/header/Header';
+import HeaderContainer from './components/header/HeaderContainer';
 import NavBar from './components/navbar/Navbar';
 import UsersContainer from "./components/users/UsersContainer";
 import DialogsContainer from "./components/dialogs/DialogsContainer";
@@ -12,7 +12,7 @@ const App = () => {
     return (
         <div className="App">
             <div className='wrapper'>
-                <Header/>
+                <HeaderContainer/>
                 <NavBar/>
                 <main className='content'>
                     <Route path='/dialogs'
