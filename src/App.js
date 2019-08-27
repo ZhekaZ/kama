@@ -4,11 +4,11 @@ import './App.scss';
 
 import Header from './components/header/Header';
 import NavBar from './components/navbar/Navbar';
-import Profile from './components/profile/Profile';
 import UsersContainer from "./components/users/UsersContainer";
 import DialogsContainer from "./components/dialogs/DialogsContainer";
+import ProfileContainer from "./components/profile/ProfileContainer";
 
-const App = props => {
+const App = () => {
     return (
         <div className="App">
             <div className='wrapper'>
@@ -18,7 +18,7 @@ const App = props => {
                     <Route path='/dialogs'
                            render={ () => <DialogsContainer /> }/>
                     <Route path='/profile'
-                           render={ () => <Profile /> }/>
+                           render={ () => <ProfileContainer /> }/>
 
                     <Route path='/users'
                            render={ () => <UsersContainer /> }/>
