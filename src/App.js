@@ -5,8 +5,9 @@ import './App.scss';
 import HeaderContainer from './components/header/HeaderContainer';
 import NavBar from './components/navbar/Navbar';
 import UsersContainer from "./components/users/UsersContainer";
-import DialogsContainer from "./components/dialogs/DialogsContainer";
-import ProfileContainer from "./components/profile/ProfileContainer";
+import DialogsContainer from './components/dialogs/DialogsContainer';
+import ProfileContainer from './components/profile/ProfileContainer';
+import Login from './components/login/Login';
 
 const App = () => {
     return (
@@ -17,11 +18,15 @@ const App = () => {
                 <main className='content'>
                     <Route path='/dialogs'
                            render={ () => <DialogsContainer /> }/>
+
                     <Route path='/profile/:userId?'
                            render={ () => <ProfileContainer /> }/>
 
                     <Route path='/users'
                            render={ () => <UsersContainer /> }/>
+
+                    <Route path='/login'
+                           render={ () => <Login /> }/>
                 </main>
             </div>
         </div>
