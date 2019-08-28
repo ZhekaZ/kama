@@ -1,25 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Header from './Header';
-import * as axios from "axios";
-import CONST from "../../CONST";
-import { connect } from "react-redux";
-import { setAuthUserData } from "../../store/reducers/auth.reducer";
-import { toggleIsFetching } from "../../store/reducers/users.reducer";
+import { getAuthUserData } from '../../store/reducers/auth.reducer';
+import { toggleIsFetching } from '../../store/reducers/users.reducer';
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
         this.props.toggleIsFetching(true);
 
-        axios.get(CONST.BASE_URL + `/auth/me`, {
-            withCredentials: true,
-        })
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    let { id, email, login } = response.data.data;
-                    this.props.setAuthUserData(id, email, login);
-                }
-                this.props.toggleIsFetching(false);
-            })
+        this.props.getAuthUserData();
     }
 
     render() {
@@ -37,6 +26,6 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-    setAuthUserData,
+    getAuthUserData,
     toggleIsFetching,
 })(HeaderContainer);

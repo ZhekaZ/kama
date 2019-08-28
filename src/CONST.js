@@ -1,5 +1,5 @@
 export const CONST = {
-    API_KEY: '78682f69-ebac-4a63-a302-50e0eb3ee939',
+    API_KEY: 'ea99642a-c56f-4ac8-90d1-8cacaff4210c',
     ADD_POST: 'ADD-POST',
     BASE_URL: 'https://social-network.samuraijs.com/api/1.0/',
     PHOTO_URL: 'https://randomuser.me/api/portraits/med/lego/6.jpg',

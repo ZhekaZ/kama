@@ -1,4 +1,5 @@
 import CONST from '../../CONST';
+import { authAPI } from "../../api";
 
 const initialState = {
     userId: null,
@@ -21,6 +22,18 @@ const authReducer = (state = initialState, action) => {
     }
 };
 
+// action creators
 export const setAuthUserData = (userId, email, login) => ({ type: CONST.SET_USER_DATA, data: { userId, email, login } });
+
+// thunks
+export const getAuthUserData = () => dispatch => {
+    authAPI.me()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                let { id, email, login } = response.data.data;
+                dispatch(setAuthUserData(id, email, login));
+            }
+        })
+};
 
 export default authReducer;
