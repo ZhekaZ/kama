@@ -1,7 +1,8 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-import Users from './Users';
 
+import Users from './Users';
 import {
     follow, unfollow, getUsers, setCurrentPage, toggleFollowingProgress,
 } from '../../store/reducers/users.reducer';
@@ -38,7 +39,7 @@ class UsersContainer extends React.Component {
 
 }
 
-const AuthRedirectComponent = WithAuthRedirect(UsersContainer);
+// const AuthRedirectComponent = WithAuthRedirect(UsersContainer);
 
 const mapStateToProps = state => {
     return {
@@ -51,10 +52,13 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers,
-})(AuthRedirectComponent);
+export default compose(
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsers,
+    }),
+    WithAuthRedirect
+)(UsersContainer);
